@@ -1,13 +1,11 @@
 const CACHE_NAME = 'tiltguard-v1';
 
-// Add every file your app needs to run offline
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
-  // add your .css, .js, and other files here, e.g. './style.css', './app.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -20,9 +18,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
-      )
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
     )
   );
   self.clients.claim();
